@@ -1,0 +1,118 @@
+\documentclass[landscape, 12pt,a4paper,notitlepage]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{cmap} %выделение текста в pdf
+\usepackage{textcase} %верхий нижний регистр переопределение
+\usepackage[pdfauthor={Gorbunova A.},hidelinks]{hyperref} %активные гиперссылки
+\usepackage{graphicx} %добавление картинок
+\usepackage{wrapfig}
+\usepackage{geometry}
+\geometry{a4paper, left=15mm,top=10mm,bottom=15mm,right=15mm}
+\usepackage[justification=centering]{caption} 
+\renewcommand{\theequation}{\arabic{equation}}
+\usepackage{amsmath,amssymb} 
+\usepackage[normalem]{ulem} %подписи слагаемых
+\usepackage{cancel} %зачеркивание в формулах
+\usepackage{empheq} %формулы в рамочках
+\usepackage{multicol}
+
+%\usepackage{mathtools} %подписи над и под стрелочками
+%\usepackage{fancyhdr} %футер
+%\usepackage{lastpage}
+%\pagestyle{fancy}
+%\fancyhf{}
+%\fancyfoot[R]{Page \thepage\ of \pageref{LastPage}}
+%\renewcommand{\headrulewidth}{0pt}
+\usepackage{epstopdf}
+\epstopdfDeclareGraphicsRule{.eps}{pdf}{.pdf}{%
+	ps2pdf -dEPSCrop #1 \OutputFile
+}
+
+
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\avg}[1]{\left< #1 \right>}
+\newcommand{\cc}[1]{{#1}^\ast}
+\newcommand{\enc}[1]{\left(#1\right)}
+\newcommand{\benc}[1]{\left[#1\right]}
+\newcommand{\fenc}[1]{\left\{#1\right\}}
+
+\renewcommand{\Re}{\text {Re}\,}
+\renewcommand{\Im}{\text {Im}\,}
+
+\newcommand{\dif}[2]{\cfrac{d#2}{d#1}}
+\newcommand{\adv}[1]{(\bold{v}\cdot \nabla )#1}
+\newcommand{\difsecond}[2]{\cfrac{d^2 #2}{d {#1}^2}}
+\newcommand{\pdif}[2]{\partial_{#1} {#2}}
+\newcommand{\pdifh}[2]{\cfrac{\partial #2}{\partial #1}}
+\newcommand{\pdifsecond}[2]{\partial^2_#1 #2}
+\newcommand{\half}[0]{\frac{1}{2}}
+\newcommand{\eps}[0]{\varepsilon}
+\newcommand{\bv}[0]{\bold{v}}
+\newcommand{\tg}[0]{\text{tg} \ }
+\begin{document}
+	\par Following results are obtained from the simulation on the grid of size $N=128^3$ cells with $R_\lambda = 60$. The time step of the simulation is $\Delta t = 0.2 \simeq 1.333 \times 10^{-3} \tau_0$, time window of the recording of correlation curves is $t_w = 75 \simeq 0.5 \tau_0 $, where $\tau_0$ is the large eddy-turnover time. Time advancement scheme is RK2, forcing is random, de-aliasing method is truncation. Local correlations are computed as correlation of the real parts of velocity in the spectral space. Spatial averaging shells are distanced linearly in the spectral space. The time averaging of the correlation curves is performed during the simulation : all instantaneous curves are accumulated and divided by the number of curves. The squares of the correlation function are also accumulated in the simulation to compute the variance.
+\begin{figure}[hh]
+	\centering
+	\includegraphics[width=0.96\textwidth]{curves} \\
+	\caption[.]{Resulting curves of the normalized two-point correlation function for various wavenumbers resulting from averaging over 1846 curves in three different scales. Correlation function is normalized as $C_2(t, k) / C_2(t=0, k)$. Time axis is normalized by $\tau_0$. The grey vertical bars correspond to the selected values of $t^\prime k^\prime$ used in the following plots.}
+\end{figure}
+\newpage
+\begin{figure}
+	\centering
+	\includegraphics[width=0.96\textwidth]{errorbars} \\
+	\caption[.]{An example of the normalized averaged correlation function with errorbars in linear and logarithmic vertical scaling, for the wavenumber $k=13$. The size of errorbars corresponds to the standard deviation (normalized by the same value).}
+\end{figure}
+\newpage
+\begin{figure}
+	\centering
+	\includegraphics[width=0.96\textwidth]{tk00} \\
+	\caption[.]{The evolution of the normalized mean and standard deviation of the correlation function with increasing number of curves in average in the point $t^\prime k^\prime =0$ at various wavenumbers. The mean value remains constant because of the chosen way of normalization : each averaged curve is normalized individually with the value $C_2(t = 0, k)$, so each averaged curve is adjusted to be equal to 1 in the beginning. The standard deviations are normalized by the same values $C_2(t = 0, k)$.} 
+\end{figure}
+\newpage
+\begin{figure}
+	\centering
+	\includegraphics[width=0.96\textwidth]{tk02} \\
+	\caption[.]{The evolution of the normalized mean and standard deviation of the correlation function with increasing number of curves in average in the point $t^\prime k^\prime =0.2$. This point belongs to the range of gaussian decay of the correlation function. The level of the standard deviation is much lower comparing to the mean value.} 
+\end{figure}
+\newpage
+\begin{figure}
+	\centering
+	\includegraphics[width=0.96\textwidth]{tk07} \\
+	\caption[.]{The evolution of the normalized mean and standard deviation of the correlation function with increasing number of curves in average in the point $t^\prime k^\prime =0.7$. This point also belongs to the range of gaussian decay, but at this point correlation is becomes weaker, ans the levels of deviation become comparable to the values of the mean.} 
+\end{figure}
+\newpage
+\begin{figure}
+	\centering
+	\includegraphics[width=0.96\textwidth]{tk12} \\
+	\caption[.]{The evolution of the normalized mean and standard deviation of the correlation function with increasing number of curves in average in the point $t^\prime k^\prime = 1.2$. This point lies outside of the range of gaussian decay of the correlation function. Some of the curves have a good flat fragment in this range, but the statistical variance in the range seems to be to high to have certain results.} 
+\end{figure}
+\newpage
+\begin{figure}
+	\centering
+	\includegraphics[width=0.96\textwidth]{tk12_zoom} \\
+	\caption[.]{The same plot for the point $t^\prime k^\prime = 1.2$ with the zoomed range of number of curves $> 1000$. Standard deviation looks stabilized, but stabilized at rather high levels.} 
+\end{figure}
+\newpage
+\begin{figure}
+	\centering
+	\includegraphics[width=0.96\textwidth]{tk18} \\
+	\caption[.]{The evolution of the normalized mean and standard deviation of the correlation function with increasing number of curves in average in the point $t^\prime k^\prime = 1.8$. All considered scales seem to be almost fully decorrelated at this point.} 
+\end{figure}
+\newpage
+\begin{figure}
+	\centering
+	\includegraphics[width=0.96\textwidth]{tk18_zoom} \\
+	\caption[.]{The same plot for the point $t^\prime k^\prime = 1.8$ with the zoomed range of number of curves $> 1000$.} 
+\end{figure}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
