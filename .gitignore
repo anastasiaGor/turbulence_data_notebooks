@@ -1,7 +1,9 @@
 # IPython
 profile_default/
 ipython_config.py
-*/.ipynb_checkpoints/*.ipynb
+.ipynb_checkpoint/
+**/.ipynb_checkpoint/
+*checkpoint.ipynb
 
 *.png
 *.pdf
